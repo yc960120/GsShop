@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+
+		<title>发表评论</title>
+
+		<link href="/css/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
+		<link href="/css/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
+		<link href="/css/personal.css" rel="stylesheet" type="text/css">
+		<link href="/css/appstyle.css" rel="stylesheet" type="text/css">
+		<script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+	</head>
+
+	<body>
+		<!--头 -->
+		<header>
+		{layout name="layout" /}
+		</header>
+            <div class="nav-table">
+					   <div class="long-title"><span class="all-goods">全部分类</span></div>
+					   <div class="nav-cont">
+							<ul>
+								<li class="/index/index/index"><a href="#">首页</a></li>
+                                <li class="qc"><a href="#">闪购</a></li>
+                                <li class="qc"><a href="#">限时抢</a></li>
+                                <li class="qc"><a href="#">团购</a></li>
+                                <li class="qc last"><a href="#">大包装</a></li>
+							</ul>
+						    <div class="nav-extra">
+						    	<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
+						    	<i class="am-icon-angle-right" style="padding-left: 10px;"></i>
+						    </div>
+						</div>
+			</div>
+			<b class="line"></b>
+		<div class="center">
+			<div class="col-main">
+				<div class="main-wrap">
+					<div class="user-comment">
+						<!--标题 -->
+						<div class="am-cf am-padding">
+							<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">发表评论</strong> / <small>Make&nbsp;Comments</small></div>
+						</div>
+						<hr/>
+
+						{if !empty($unComment)}
+						{foreach $unComment as $comment}
+
+						<div class="comment-main" >
+							<div class="comment-list">
+								<div class="item-pic">
+									<a href="#" class="J_MakePoint">
+										<img src="{$comment.img_path}" class="itempic">
+									</a>
+								</div>
+
+								<div class="item-title">
+									<div class="item-name">
+										<a href="#">
+											<p class="item-basic-info">{$comment.goods_name}</p>
+										</a>
+									</div>
+									<div class="item-info">
+										<div class="info-little">
+											{$comment.ord_info}
+										</div>
+										<div class="item-price">
+											价格：<strong>{$comment.price}元</strong>
+										</div>										
+									</div>
+								</div>
+								<div class="clear"></div>
+								<div class="item-comment">
+									<textarea placeholder="请写下对宝贝的感受吧，对他人帮助很大哦！" name="content" id="content"></textarea>
+								</div>
+								<input type="button" name="button" value="发表评论" style="margin-left:700px;" id="but">
+								<input type="hidden" name="ord_id" value="{$comment['ord_id']}" id="ord_id">
+								<div class="item-opinion">
+									<li><i class="op1"></i>好评</li>
+									<li><i class="op2"></i>中评</li>
+									<li><i class="op3"></i>差评</li>
+								</div>
+							</div>
+									
+						<script type="text/javascript">
+							$(document).ready(function() {
+								$(".comment-list .item-opinion li").click(function() {	
+									$(this).prevAll().children('i').removeClass("active");
+									$(this).nextAll().children('i').removeClass("active");
+									$(this).children('i').addClass("active");
+								});
+					     })
+						</script>
+					</div>
+			
+					{/foreach}
+					{/if}
+					</div>
+				</div>
+				<!--底部-->
+				<div class="footer">
+					<div class="footer-hd">
+						<p>
+							<a href="#">GS科技</a>
+							<b>|</b>
+							<a href="/index/index/index">商城首页</a>
+							<b>|</b>
+							<a href="#">支付宝</a>
+							<b>|</b>
+							<a href="https://m.kuaidi100.com/">快递100</a>
+						</p>
+					</div>
+					
+				</div>
+			</div>
+
+	<aside class="menu">
+				<ul>
+					<li class="person">
+						<a href="index.html">个人中心</a>
+					</li>
+					<li class="person">
+						<a href="#">个人资料</a>
+						<ul>
+							<li> <a href="/index/user/userinfo">个人信息</a></li>
+							<li> <a href="/index/user/password">安全设置</a></li>
+							<li> <a href="/index/user/address">收货地址</a></li>
+						</ul>
+					</li>
+					<li class="person">
+						<a href="#">我的交易</a>
+						<ul>
+							<li  class="active"><a href="/index/order/order">订单管理</a></li>
+							<li> <a href="/index/order/change">退款售后</a></li>
+						</ul>
+					</li>
+					<li class="person">
+						<a href="#">我的资产</a>
+						<ul>
+							<li> <a href="/index/user/discount">优惠券 </a></li>
+							<li> <a href="/index/user/red">红包</a></li>
+							<li> <a href="/index/user/bill">账单明细</a></li>
+						</ul>
+					</li>
+
+					<li class="person">
+						<a href="#">我的小窝</a>
+						<ul>
+							<li> <a href="/index/user/collection">收藏</a></li>
+							<li> <a href="/index/foot/myfoot">足迹</a></li>
+							<li> <a href="/index/comment/comment">评价</a></li>
+						</ul>
+					</li>
+				</ul>
+			</aside> 
+		</div>
+
+	</body>
+<script type="text/javascript">
+	$(function(){
+			$('#but').click(function(){
+				var list = [];
+				list.push($('#content').val());
+				list.push($('#ord_id').val());
+				list.push($('.active').parent('li').text());
+				var b;
+				b = list.join('-');
+				$.post("/index/comment/write", {b:b},success,'json');
+			});
+
+			function success(data)
+			{
+				if(data.state == 1){
+					alert('评论成功');
+					$('.active').parents('.comment-main').html('');
+				}else{
+					alert('评论失败');
+				}
+			}
+		
+	});
+
+
+</script>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>找回密码</title>
+</head>
+<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+<style type="text/css">
+	.button{
+		background-color:pink;
+	}
+	.submit{
+		background-color: pink;
+	}
+	#yzmstatus{
+		display: none;
+		color：red;
+	}
+</style>
+<body>
+	<table>
+		<form action="/index/index/doforget" method="post">
+		<tr>
+			<td>手机号：</td>
+			<td><input type="text" name="phone"  /></td>
+			<td><input type="button" value="点击获取验证码" name="button" class="button"><br /></td>
+		</tr>
+		<tr>
+			<td>验证码：</td>
+			<td><img src="{:captcha_src()}" alt="captcha" id="captchaimg"  /></td>
+			<td><span style="color: red" id="changeyzm">点我换一张</span></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input type="text" name="yzm" /></td>
+			<td><span id="yzmstatus"></span></td>
+		</tr>
+		<tr>
+			<td>
+				手机验证码：
+			</td>
+			<td>
+				<input type="text" name="phoneyzm" /><br />
+			</td>
+			<td></td>
+		</tr>
+			<tr>
+				<td colspan="2" align="center"><input type="submit" name="submit" value="下一步" class="submit"></td>
+				<td></td>
+			</tr>
+		</form>
+	</table>
+</body>
+<script type="text/javascript">
+	$(function(){
+		$('[name=button]').click(function(){
+			phone = $('[name=phone]').val();
+			$.post('/index/index/checkphone',{phone:phone},check123,'json');
+			
+			function check123(phone)
+			{
+				if(phone.state == 1){
+					alert('短信已发送');
+				}else{
+					alert('短信发送失败');
+				}
+			}
+		});
+
+		//更换验证码图片
+	    $('#captchaimg').click(function() {
+            $(this).attr('src',$(this).attr('src'));
+        });
+        $('#changeyzm').click(function() {
+            $('#captchaimg').attr('src',$('#captchaimg').attr('src'));
+        });
+
+        $('[name=yzm]').blur(function(){
+        	$('#yzmstatus').html('');
+			yzm = $('[name=yzm]').val();
+			$.post('/index/index/checkyzm',{yzm:yzm},recheckyzm,'json');
+			
+			function recheckyzm(data)
+			{
+				if(data.state == 1){
+					$('#yzmstatus').css('display','block');
+				    $('#yzmstatus').html('验证码正确').css('color','green');
+				    
+				}else{
+					$('#yzmstatus').css('display','block');
+				    $('#yzmstatus').html('验证码错误').css('color','red');
+				}
+			}
+		});
+
+
+
+});
+
+</script>
+</html>

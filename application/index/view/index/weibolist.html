@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>微博列表</title>
+</head>
+<body>
+	{$user_message['screen_name']}
+	{foreach $ms['statuses'] as $val}
+	<div>
+		{$val['text']}
+	</div>
+	<br />
+	{/foreach}
+</body>
+</html>

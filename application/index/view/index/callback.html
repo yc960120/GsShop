@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>授权成功</title>
+	<meta http-equiv=refresh content=3;url='index'/>
+</head>
+<body>
+	<div align="center">
+		<font size=4>授权成功<span id="jump">3</span> 秒后自动商城首页，或者通过以下连接到商城首页。</font><br />
+		<a href="/index/index/index">点击进入商城首页</a>&nbsp;&nbsp;
+		<a href="/index/index/weibolist">点击进入微博列表页</a>
+	</div>
+	
+</body>
+
+<script language="JavaScript">
+	 function ok(){
+	    window.parent.parent.location.href="{url('/index/index/index')";
+	 }
+	 window.setTimeout("ok();",3000);
+	 function countDown(secs){
+	       jump.innerText=secs;
+	       if(--secs>0)
+	          setTimeout( "countDown(" +secs+ ")" ,1000);
+	    }
+	    countDown(3);
+</script>
+
+</html>

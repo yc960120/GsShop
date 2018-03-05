@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+	<html xmlns:wb="http://open.weibo.com/wb">
+	<head lang="en">
+		<meta charset="UTF-8">
+		<title>登录</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<link rel="stylesheet" href="/css/AmazeUI-2.4.2/assets/css/amazeui.css" />
+		<link href="/css/dlstyle.css" rel="stylesheet" type="text/css">
+		<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+		<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<style type="text/css">
+	.tips {
+		-moz-border-radius: 3px;
+		-webkit-border-radius: 3px;
+		border-radius: 3px;
+		-moz-box-shadow: 0 0 0 transparent;
+		-webkit-box-shadow: 0 0 0 transparent;
+		box-shadow: 0 0 0 transparent;
+		position: absolute;
+		left: 350px;
+		margin-top: -42px;
+		padding: 0 10px;
+		height: 32px;
+		color: white;
+		background: #e62163;
+		border: 0;
+		font: 14px Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;
+		line-height: 32px;
+		white-space: nowrap;
+		display:none;
+	}
+	.tips:before{
+		width: 0;
+		height: 0;
+		left: -8px;
+		top: 12px;
+		content: '';
+		position: absolute;
+		border-top: 4px solid transparent;
+		border-right: 8px solid #e62163;
+		border-bottom: 4px solid transparent;
+	}
+</style>
+	</head>	
+	<body>
+
+		<div class="login-boxtitle">
+			<a href="home.html"><img alt="logo" src="/images/logobig.png" /></a>
+		</div>
+
+		<div class="login-banner">
+			<div class="login-main">
+				<div class="login-banner-bg"><span></span><img src="/images/big.jpg" /></div>
+				<div class="login-box">
+
+					<h3 class="title">登录商城</h3>
+
+					<div class="clear"></div>
+						
+					<div class="login-form">
+						<form action="/index/index/doLogin" method="post">
+							   <div class="user-name">
+								    <label for="user"><i class="am-icon-user"></i></label>
+								    <input type="text" name="username" id="user" placeholder="邮箱/手机/用户名">
+                			   </div>
+                			   <span class="tips" id="span"></span>
+               				   <div class="user-pass">
+								     <label for="password"><i class="am-icon-lock"></i></label>
+							  	     <input type="password" name="password" id="password" placeholder="请输入密码">
+                			   </div>
+                			    <span class="tips" id="span2"></span>
+                			   <div class="am-cf">
+									 <input type="submit" name="submit" value="登 录" class="am-btn am-btn-primary am-btn-sm" disabled="disabled">
+								</div>
+             			 </form>
+          			 </div>
+            
+          			<div class="login-links">
+                         	<label for="remember-me"><input id="remember-me" type="checkbox">记住密码</label>
+							<a href="/index/index/forget" class="am-fr">忘记密码</a>
+							<a href="/index/index/register" class="zcnext am-fr am-btn-default">注册</a>
+							<br />
+            		</div>
+				
+					<div class="partner">		
+								<h3>合作账号</h3>
+							<div class="am-btn-group">
+								<li><a href="#"><i class="am-icon-qq am-icon-sm"></i><span>QQ登录</span></a></li>
+								<li><a href="<?=$code_url?>"><img src="/images/weibo_login.png" title="点击进入授权页面" alt="点击进入授权页面" border="0" / style="height:25px;position:relative;left:5px;top:5px;"></a></li>
+								<li style="position:relative;left:45px;top:5px;"><a><wb:share-button appkey="1445628723" addition="simple" type="button"></wb:share-button></a></li>
+								
+							</div>
+						</div>	
+				</div>
+			</div>
+		</div>
+	<div class="footer ">
+	<div class="footer-hd ">
+		<p>
+			<a href="# ">GS科技</a>
+			<b>|</b>
+		    <a href="/index/index/index">商城首页</a>
+			<b>|</b>
+			<a href="# ">支付宝</a>
+			<b>|</b>
+			<a href="https://m.kuaidi100.com/">快递100</a>
+		</p>
+	</div>
+</div>
+
+					
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			var flag1 = false;
+			$('[name=username]').blur(function(){
+				username = $('[name=username]').val();
+				$('#span').html('');
+			if(username == ''){
+				$('#span').css('display','block');
+				$('#span').html('请输入用户名');
+				flag1 = false;
+			} else if(username.length < 6){
+				$('#span').css('display','block');
+				$('#span').html('用户名长度不能小于6');
+				flag1 = false;
+			} else {
+				$('#span').css('display','none');
+				$.post('/index/index/selogin',{username:username},check,'json');
+			}
+			checksubmit();
+		});
+			var flag2 = false;
+			$('[name="password"]').blur(function(){
+				 $('#span2').html('');
+				 password = $('[name=password]').val();
+				 if(password == ''){
+				 	$('#span2').css('display','block');
+					$('#span2').html('密码不为空');
+				    flag2 = false;
+				 }else{
+				 	flag2 = true;
+				 }
+				 checksubmit();
+			});
+
+			function check(data)
+			{
+				if(data.state == 1){
+					$('#span').html('用户名合法');
+					$('#span').css('display','block');
+					flag1 = true;
+				}else{
+					$('#span').html('该用户名不存在，请先注册');
+					$('#span').css('display','block');
+					flag1 = false;
+				}
+				checksubmit();
+			}
+			
+			function checksubmit()
+			{
+				if(flag1 && flag2){
+					$('[name=submit]').removeAttr('disabled');
+				}
+			}
+
+	});
+	</script>
+</html>

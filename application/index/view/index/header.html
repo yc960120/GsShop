@@ -1,0 +1,86 @@
+<!--顶部导航条 -->
+<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+	<div class="hmtop">
+			<div class="am-container header">
+				<ul class="message-l">
+					<div class="topMessage">
+					{if empty(session('username'))}
+						<div class="menu-hd">
+							<a href="/index/index/login" target="_top" class="h">亲，请登录</a>
+							<a href="/index/index/register" target="_top">免费注册</a>
+						</div>
+					{else}
+						<div class="menu-hd">
+							<a href="/index/index/login" target="_top" class="h">
+							欢迎您   {$Think.session.username}
+							</a>&nbsp;&nbsp;&nbsp;&nbsp;
+							<a href="/index/index/logout" target="_top">退出</a>
+						</div>
+					{/if}
+					</div>
+				</ul>
+				<ul class="message-r">
+					<div class="topMessage home">
+						<div class="menu-hd"><a href="/index/index/index" target="_top" class="h">商城首页</a></div>
+					</div>
+					<div class="topMessage my-shangcheng">
+						<div class="menu-hd MyShangcheng"><a href="/index/user/index" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
+					</div>
+					<div class="topMessage mini-cart">
+						<div class="menu-hd"><a id="mc-menu-hd" href="/index/cart/shopcart" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h"></strong></a></div>
+					</div>
+					<div class="topMessage favorite">
+						<div class="menu-hd">
+							<a href="/index/user/collection" target="_top">
+							<i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span>
+							</a>
+						</div>
+					</div>
+				</ul>
+			</div>
+
+			<!--悬浮搜索框-->
+
+			<div class="nav white">
+				 <div class="logo"><img src="" /></div> 
+				<div class="logoBig">
+					<li><img src="/images/logobig.png" /></li>
+				</div>
+
+				<div class="search-bar pr">
+					<a name="index_none_header_sysc" href="#"></a>
+					<form action="/index/goods/search" method="post">
+						<input id="searchInput" name="keyword" type="text" placeholder="搜索" autocomplete="off" >
+						<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit" name="submit">
+						<input type="hidden" name="id" value="2" />
+					</form>
+				</div>
+			</div>
+			<div class="clear"></div>
+	</div>
+
+<script type="text/javascript">
+	$(function(){
+		$('[name=keyword]').blur(function(){
+			var keyword = $('[name=keyword]').val();
+			if(keyword == ''){
+				alert('请输入您想要搜索的内容');
+			}
+		});
+
+			var keyword = $('[name=keyword]').val();
+			if(keyword == ''){
+				$('[name=keyword]').bind('keydown',function(e){
+					var key = e.which;
+					if(key == 13){
+						e.preventDefault();
+					}
+				});
+			}
+			
+		
+	});
+
+</script>
+
+
